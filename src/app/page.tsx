@@ -265,47 +265,93 @@ export default function Home() {
       {/* Pricing - Direct & Honest */}
       <section style={{ padding: '5rem 1rem', background: 'var(--background)' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>One Price. Endless Interviews.</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Invest in Your Career.</h2>
           <p style={{ color: 'var(--muted-foreground)', marginBottom: '3rem', maxWidth: '500px', margin: '0 auto 3rem' }}>
-            We know job hunting in India is stressful. That's why we don't do sneaky subscriptions. Just pay once, secure your future.
+            We know job hunting in India is stressful. That's why we don't do sneaky subscriptions. Choose the plan that fits you best.
           </p>
 
-          <div style={{ maxWidth: '400px', margin: '0 auto', background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '2px solid var(--primary)', position: 'relative' }}>
-            <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'var(--primary)', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600 }}>
-              Launch Price
-            </span>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            maxWidth: '900px',
+            margin: '0 auto'
+          }}>
+            {/* Standard Plan */}
+            <div style={{ background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Standard</h3>
+              <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Perfect for quick optimizations.</p>
 
-            <div style={{ fontSize: '4rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹499</div>
-            <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Only pay when you generate.</p>
+              <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹999</div>
+              <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Pay once per iteration.</p>
 
-            <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                <span>Full ATS System Optimization</span>
-              </li>
-              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                <span>Professional Content Rewriting</span>
-              </li>
-              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                <span>Custom Interview Preparation PDF</span>
-              </li>
-              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                <span>High-Quality PDF Resume Export</span>
-              </li>
-            </ul>
+              <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>Full ATS System Optimization</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>Professional Content Rewriting</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>High-Quality PDF Resume Export</span>
+                </li>
+              </ul>
 
-            <button
-              className="btn btn-primary"
-              style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}
-              onClick={() => {
-                document.getElementById('interactive-widget')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Start My Free Analysis
-            </button>
+              <button
+                className="btn"
+                style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', background: 'var(--muted)', color: 'var(--foreground)' }}
+                onClick={() => {
+                  document.getElementById('interactive-widget')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Choose Standard
+              </button>
+            </div>
+
+            {/* Pro Plan */}
+            <div style={{ background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '2px solid var(--primary)', position: 'relative', display: 'flex', flexDirection: 'column', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.15)' }}>
+              <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'var(--primary)', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600 }}>
+                Most Popular
+              </span>
+
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Pro</h3>
+              <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>For serious job seekers.</p>
+
+              <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹4999</div>
+              <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Comprehensive career optimization.</p>
+
+              <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>Everything in Standard</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span style={{ fontWeight: 600 }}>Custom Interview Preparation PDF</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>LinkedIn Profile Optimization Guide</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                  <span>Priority 1-on-1 Expert Review</span>
+                </li>
+              </ul>
+
+              <button
+                className="btn btn-primary"
+                style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}
+                onClick={() => {
+                  document.getElementById('interactive-widget')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Go Pro & Get Hired
+              </button>
+            </div>
           </div>
         </div>
       </section>
