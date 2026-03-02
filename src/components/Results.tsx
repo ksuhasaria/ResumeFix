@@ -26,9 +26,8 @@ export default function Results() {
     };
 
     return (
-        <section className="section-padding" style={{ background: 'var(--muted)', minHeight: '100vh' }}>
-            <div className="container">
-
+        <div style={{ background: 'var(--muted)', width: '100%', borderRadius: 'inherit' }}>
+            <div style={{ padding: '2rem 1rem' }}>
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
@@ -184,7 +183,7 @@ export default function Results() {
                 </div>
 
             </div>
-        </section>
+        </div>
     );
 }
 

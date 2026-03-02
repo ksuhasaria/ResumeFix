@@ -13,8 +13,8 @@ export default function Analyzing() {
     }, []);
 
     return (
-        <section className="section-padding">
-            <div className="container" style={{ maxWidth: '600px', textAlign: 'center' }}>
+        <div style={{ padding: '3.5rem 1.5rem', textAlign: 'center' }}>
+            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto 3rem' }}>
                     <motion.div
                         animate={{ rotate: 360 }}
@@ -44,7 +44,7 @@ export default function Analyzing() {
                     <LoadingStep icon={<CheckCircle size={18} />} text="Finalizing interview questions..." delay={4.5} />
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 

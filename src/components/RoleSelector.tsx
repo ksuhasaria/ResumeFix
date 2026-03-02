@@ -20,8 +20,8 @@ export default function RoleSelector() {
     const { state, setSelectedRole, setStep } = useAppContext();
 
     return (
-        <section className="section-padding">
-            <div className="container" style={{ maxWidth: '800px' }}>
+        <div style={{ padding: '2rem 1rem' }}>
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Step 2: What's your target role?</h2>
                     <p style={{ color: 'var(--muted-foreground)' }}>We'll optimize your resume specifically for this job category in India.</p>
@@ -61,20 +61,20 @@ export default function RoleSelector() {
                     ))}
                 </div>
 
-                <div style={{ marginTop: '4rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                    <button className="btn" style={{ border: '1px solid var(--border)' }} onClick={() => setStep('upload')}>
+                <div style={{ marginTop: '4rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <button className="btn" style={{ border: '1px solid var(--border)', flex: '1 1 auto' }} onClick={() => setStep('upload')}>
                         Back
                     </button>
                     <button
                         className="btn btn-primary"
                         disabled={!state.selectedRole}
                         onClick={() => setStep('payment')}
-                        style={{ padding: '0.75rem 3rem', opacity: !state.selectedRole ? 0.5 : 1 }}
+                        style={{ padding: '0.75rem 1rem', opacity: !state.selectedRole ? 0.5 : 1, flex: '2 1 auto' }}
                     >
                         Confirm & Proceed to Payment ₹499 <ChevronRight size={18} />
                     </button>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

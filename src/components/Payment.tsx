@@ -20,9 +20,9 @@ export default function Payment() {
     };
 
     return (
-        <section className="section-padding">
-            <div className="container" style={{ maxWidth: '900px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '3rem' }}>
+        <div style={{ padding: '2rem 1rem' }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '3rem' }}>
 
                     {/* Summary */}
                     <div>
@@ -79,7 +79,7 @@ export default function Payment() {
 
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
 

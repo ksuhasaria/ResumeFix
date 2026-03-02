@@ -49,8 +49,8 @@ export default function FileUpload() {
     };
 
     return (
-        <section className="section-padding">
-            <div className="container" style={{ maxWidth: '600px' }}>
+        <div style={{ padding: '2rem 1rem' }}>
+            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Step 1: Upload Your Resume</h2>
                     <p style={{ color: 'var(--muted-foreground)' }}>Upload your existing resume. We support PDF and DOCX formats.</p>
@@ -145,6 +145,6 @@ export default function FileUpload() {
                     </button>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }
