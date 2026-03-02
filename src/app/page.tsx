@@ -44,13 +44,13 @@ export default function Home() {
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3rem', padding: '0 1rem' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--primary)', padding: '0.5rem 1rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600, marginBottom: '1.5rem' }}>
-              <span style={{ marginRight: '0.5rem' }}>🔥</span> Built for Indian Job Seekers (20-30 Yrs)
+              <span style={{ marginRight: '0.5rem' }}>🔥</span> Built for Indian Job Seekers (0-5 Yrs Exp)
             </div>
             <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
-              Stop Applying.<br />Start <span style={{ color: 'var(--primary)' }}>Interviewing.</span>
+              Stop Getting Rejected.<br />Start <span style={{ color: 'var(--primary)' }}>Getting Callbacks.</span>
             </h1>
             <p style={{ fontSize: '1.1rem', color: 'var(--muted-foreground)', marginBottom: '2rem', lineHeight: 1.6 }}>
-              75% of resumes are rejected by bots. We rewrite your resume to beat the ATS, optimize it for your dream role at top Indian firms, and get you hired faster. All in 3 minutes.
+              Not getting interview calls? Our AI-powered service rewrites your resume for maximum clarity, making it highly HR-friendly to improve your chances at top Indian firms. All in just 3 minutes.
             </p>
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--muted-foreground)' }}>
@@ -108,7 +108,7 @@ export default function Home() {
                 <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" />
               </div>
               <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                "I was applying to 50+ jobs a week with zero callbacks. Once I used ResumeFix, I literally got 3 interview calls the same week from Bangalore startups. Money well spent."
+                "I was applying to 50+ jobs a week with zero callbacks. Once I used ResumeFix, I started seeing more interview callbacks from Bangalore startups. Money well spent."
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" alt="Rahul" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
@@ -125,7 +125,7 @@ export default function Home() {
                 <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" />
               </div>
               <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                "The ATS optimization is no joke. I never knew my formatting was killing my chances. The generated interview questions were super on-point for my role too."
+                "The AI-powered rewrite made everything so clear. I never knew my formatting was killing my chances. The generated interview questions were super on-point for my role too."
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="Priya" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
@@ -181,9 +181,9 @@ export default function Home() {
               <div style={{ width: '64px', height: '64px', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                 <Zap size={32} />
               </div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>2. AI Analysis & Rewrite</h3>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>2. AI-Powered Rewrite</h3>
               <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
-                We target your specific role, optimizing keywords for ATS algorithms and rewriting bullets for impact.
+                Our AI-powered engine tailors the resume for your target role, optimizing language to be highly HR-friendly and clear.
               </p>
             </div>
 
@@ -193,7 +193,7 @@ export default function Home() {
               </div>
               <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>3. Download & Apply</h3>
               <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
-                Get an interview-ready, perfectly formatted PDF and a tailored interview prep guide instantly.
+                Get a perfectly formatted PDF that improves your chances of passing the review stage instantly.
               </p>
             </div>
           </div>
@@ -206,18 +206,18 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>
-                Stop getting ghosted by automated systems.
+                Tired of resume anxiety and rejection fatigue?
               </h2>
               <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.6 }}>
-                Traditional resume builders just give you templates. ResumeFix actually re-engineers your content to pass through modern application systems used by top tier tech companies in India.
+                Traditional resume builders just give you templates. ResumeFix actually re-engineers your content for perfect clarity and high HR-friendliness, helping you stand out to recruiters in India.
               </p>
 
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                   <div style={{ marginTop: '0.25rem', color: 'var(--primary)' }}><ShieldCheck size={24} /></div>
                   <div>
-                    <span style={{ fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>100% ATS Friendly Formats</span>
-                    <span style={{ color: 'var(--muted-foreground)' }}>No fancy columns or graphics that break ATS parsers. Just clean, readable structure.</span>
+                    <span style={{ fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>Highly HR-Friendly Formats</span>
+                    <span style={{ color: 'var(--muted-foreground)' }}>No fancy columns or graphics. Just simple, clean, and professional structures that recruiters prefer.</span>
                   </div>
                 </li>
                 <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -288,7 +288,7 @@ export default function Home() {
               <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
                 <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                  <span>Full ATS System Optimization</span>
+                  <span>HR-Friendly Structure Optimization</span>
                 </li>
                 <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
@@ -349,7 +349,7 @@ export default function Home() {
                   document.getElementById('interactive-widget')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Go Pro & Get Hired
+                Go Pro & Improve Chances
               </button>
             </div>
           </div>
