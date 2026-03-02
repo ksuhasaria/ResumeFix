@@ -14,16 +14,18 @@
   - `src/components/Analyzing.tsx`: Artificial loading state to simulate AI processing.
   - `src/components/Results.tsx`: Results dashboard including jsPDF + html2canvas integration for PDF export.
 - **Major Refactoring (Single Page Flow)**: Restructured the main `src/app/page.tsx` into a highly convincing, single-page flow heavily optimized for mobile users. The app components are now housed inside an interactive "Action Card" in the Hero section, rather than relying on separate pages.
+- **Mobile Responsiveness Fixes**: Re-tooled all embedded components by stripping away static `.section-padding` and `.container` widths that were causing horizontal overflow. Fixed grid-layouts and button stacking to ensure a 100% stable experience on mobile devices.
+- **Audience Optimization**: Added high-conversion copy, localized testimonials with professional headshots (targeting Indian software engineers, analysts, and marketing staff 20-30 years old), and social proof for major Indian firms.
 - Deployed the application continuously to Vercel via GitHub (`ksuhasaria/ResumeFix`).
 
 ## 3. Important Decisions, Context, & Bugs
-- **Design Philosophy**: Switched from multi-page routing to an embedded interactive widget on a long-scrolling landing page to maximize conversion rates on mobile devices (which account for 99.99% of our traffic).
-- **Target Audience Specificity**: Hard-coded specific messaging ("TCS Aligned", "Infosys Format") and tailored testimonials for Indian software engineers, data analysts, and marketing professionals in their 20s.
-- **Backend Mocking**: The actual AI analysis via `/api/analyze/route.ts` is currently returning mocked, hard-coded data to ensure a smooth frontend build and demo deployment. 
+- **Design Philosophy**: Switched from multi-page routing to an embedded interactive widget to increase conversion rates on mobile devices (99.9% of projected traffic).
+- **Target Audience Specificity**: Messaging and visual proof focused on Indian tech hubs (Bangalore, Gurgaon) and firms (TCS, Infosys, Zomato).
+- **Backend Mocking**: `/api/analyze/route.ts` remains mocked for development and initial deployment. 
 - **Dependencies Installed**: `lucide-react`, `framer-motion`, `jspdf`, `html2canvas`, `clsx`, `tailwind-merge`.
 
 ## 4. Immediate Next Steps
-- **Backend Implementation**: Replace the hardcoded `/api/analyze` mock with actual LLM API calls (e.g., using OpenAI or Gemini) and document parsing (e.g., `pdf-parse`) to perform genuine ATS scoring and rewriting based on the uploaded file.
-- **Payment Gateway**: Integrate a real payment provider like Razorpay to handle live UPI and card transactions for the Indian market.
-- **Styling Tweaks**: Some embedded components (like `Results.tsx`) still have inline styles or layout margins left over from the original multi-page design. These need to be stripped down or adjusted to perfectly fit inside the new Hero container widget.
-- **Storage Strategy**: Decide how uploaded resumes and generated PDFs will be stored (e.g., AWS S3, Vercel Blob) temporarily during the session.
+- **Backend Implementation (AI Parsing)**: Replace the `/api/analyze` mock with actual AI integration (e.g. Gemini/OpenAI) and file processing.
+- **Live Payment Gateway**: Integrate Razorpay/Cashfree for real UPI/Card transactions.
+- **Final Polish**: Further audit the Result dashboard's PDF layout to ensure cross-device consistency.
+- **Session Data**: Finalize strategy for short-term blob storage for uploaded resumes.
