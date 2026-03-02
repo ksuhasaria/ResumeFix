@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useAppContext } from '@/context/AppContext';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
+import { Sparkles, CheckCircle, Star, ArrowRight, ShieldCheck, Zap, Download } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import FileUpload from '@/components/FileUpload';
 import RoleSelector from '@/components/RoleSelector';
 import Payment from '@/components/Payment';
@@ -14,97 +14,195 @@ export default function Home() {
   const { state } = useAppContext();
 
   return (
-    <main>
-      <Navbar />
+    <main style={{ overflowX: 'hidden' }}>
+      {/* Navbar Minimalist */}
+      <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'var(--background)' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--primary)', fontSize: '1.25rem' }}>
+            <Sparkles size={24} /> ResumeFix
+          </div>
+        </div>
+      </nav>
 
-      {state.step === 'landing' && (
-        <>
-          <Hero />
-          <FeaturesSection />
-          <PricingSection />
-        </>
-      )}
+      {/* Hero Section */}
+      <section style={{ paddingTop: '4rem', paddingBottom: '3rem', position: 'relative' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3rem', padding: '0 1rem' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(79, 70, 229, 0.1)', color: 'var(--primary)', padding: '0.5rem 1rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600, marginBottom: '1.5rem' }}>
+              <span style={{ marginRight: '0.5rem' }}>🔥</span> Built for Indian Job Seekers (20-30 Yrs)
+            </div>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', lineHeight: 1.1, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+              Stop Applying.<br />Start <span style={{ color: 'var(--primary)' }}>Interviewing.</span>
+            </h1>
+            <p style={{ fontSize: '1.1rem', color: 'var(--muted-foreground)', marginBottom: '2rem', lineHeight: 1.6 }}>
+              75% of resumes are rejected by bots. We rewrite your resume to beat the ATS, optimize it for your dream role at top Indian firms, and get you hired faster. All in 3 minutes.
+            </p>
 
-      {state.step === 'upload' && <FileUpload />}
-      {state.step === 'role' && <RoleSelector />}
-      {state.step === 'payment' && <Payment />}
-      {state.step === 'analyzing' && <Analyzing />}
-      {state.step === 'results' && <Results />}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--muted-foreground)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><CheckCircle size={16} color="var(--success)" /> TCS Aligned</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><CheckCircle size={16} color="var(--success)" /> Infosys Format</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><CheckCircle size={16} color="var(--success)" /> Startup Ready</div>
+            </div>
+          </div>
 
-      <Footer />
+          {/* Interactive Widget */}
+          <div id="interactive-widget" style={{ maxWidth: '700px', margin: '0 auto', background: 'var(--card)', borderRadius: '1rem', border: '1px solid var(--border)', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={state.step}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {state.step === 'landing' && <FileUpload />}
+                {state.step === 'upload' && <FileUpload />}
+                {state.step === 'role' && <RoleSelector />}
+                {state.step === 'payment' && <Payment />}
+                {state.step === 'analyzing' && <Analyzing />}
+                {state.step === 'results' && <Results />}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof */}
+      <section style={{ padding: '3rem 1rem', background: 'var(--muted)', textAlign: 'center' }}>
+        <div className="container">
+          <p style={{ fontWeight: 600, color: 'var(--muted-foreground)', marginBottom: '2rem', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.85rem' }}>Trusted by professionals hired at</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', opacity: 0.6, fontWeight: 800, fontSize: '1.25rem' }}>
+            <span>TCS</span>
+            <span>INFOSYS</span>
+            <span>WIPRO</span>
+            <span>ZOMATO</span>
+            <span>AMAZON</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section style={{ padding: '5rem 1rem' }}>
+        <div className="container">
+          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '3rem' }}>Don't take our word for it.</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            {/* Testimonial 1 */}
+            <div className="glass" style={{ padding: '2rem', borderRadius: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.25rem', color: '#fbbf24', marginBottom: '1rem' }}>
+                <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" />
+              </div>
+              <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                "I was applying to 50+ jobs a week with zero callbacks. Once I used ResumeFix, I literally got 3 interview calls the same week from Bangalore startups. Money well spent."
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" alt="Rahul" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+                <div>
+                  <div style={{ fontWeight: 600 }}>Rahul Sharma</div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--muted-foreground)' }}>Software Engineer, 24</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="glass" style={{ padding: '2rem', borderRadius: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.25rem', color: '#fbbf24', marginBottom: '1rem' }}>
+                <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" />
+              </div>
+              <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                "The ATS optimization is no joke. I never knew my formatting was killing my chances. The generated interview questions were super on-point for my role too."
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="Priya" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+                <div>
+                  <div style={{ fontWeight: 600 }}>Priya Patel</div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--muted-foreground)' }}>Data Analyst, 26</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="glass" style={{ padding: '2rem', borderRadius: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.25rem', color: '#fbbf24', marginBottom: '1rem' }}>
+                <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" /> <Star size={18} fill="currentColor" />
+              </div>
+              <p style={{ fontSize: '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                "Worth every rupee. As a marketing professional, I struggled to put my impact into words. The AI perfectly reframed my bullet points to show ROI."
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Arjun" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+                <div>
+                  <div style={{ fontWeight: 600 }}>Arjun K.</div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--muted-foreground)' }}>Marketing Associate, 23</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing - Direct & Honest */}
+      <section style={{ padding: '5rem 1rem', background: 'var(--muted)' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>One Price. Endless Interviews.</h2>
+          <p style={{ color: 'var(--muted-foreground)', marginBottom: '3rem', maxWidth: '500px', margin: '0 auto 3rem' }}>
+            We know job hunting in India is stressful. That's why we don't do sneaky subscriptions. Just pay once, secure your future.
+          </p>
+
+          <div style={{ maxWidth: '400px', margin: '0 auto', background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '2px solid var(--primary)', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'var(--primary)', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600 }}>
+              Launch Price
+            </span>
+
+            <div style={{ fontSize: '4rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹499</div>
+            <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Only pay when you generate.</p>
+
+            <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <span>Full ATS System Optimization</span>
+              </li>
+              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <span>Professional Content Rewriting</span>
+              </li>
+              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <span>Custom Interview Preparation PDF</span>
+              </li>
+              <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <span>High-Quality PDF Resume Export</span>
+              </li>
+            </ul>
+
+            <button
+              className="btn btn-primary"
+              style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}
+              onClick={() => {
+                document.getElementById('interactive-widget')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Start My Free Analysis
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ padding: '3rem 1rem', borderTop: '1px solid var(--border)', textAlign: 'center', color: 'var(--muted-foreground)' }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--primary)', fontSize: '1.25rem', marginBottom: '1rem' }}>
+            <Sparkles size={24} /> ResumeFix
+          </div>
+          <p style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>Made for the ambitious Indian professional.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', fontSize: '0.85rem' }}>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Support</a>
+          </div>
+        </div>
+      </footer>
     </main>
-  );
-}
-
-function FeaturesSection() {
-  return (
-    <section id="how-it-works" className="section-padding" style={{ background: 'var(--muted)' }}>
-      <div className="container" style={{ textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '4rem' }}>Why Choose ResumeFix?</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
-          <div style={{ padding: '2rem' }}>
-            <h3 style={{ marginBottom: '1rem' }}>ATS-First Approach</h3>
-            <p style={{ color: 'var(--muted-foreground)' }}>75% of resumes are rejected by bots before a human sees them. We ensure yours gets through.</p>
-          </div>
-          <div style={{ padding: '2rem' }}>
-            <h3 style={{ marginBottom: '1rem' }}>Indian Market Context</h3>
-            <p style={{ color: 'var(--muted-foreground)' }}>Tailored for top Indian firms like TCS, Infosys, and high-growth startups in Bangalore & Gurgaon.</p>
-          </div>
-          <div style={{ padding: '2rem' }}>
-            <h3 style={{ marginBottom: '1rem' }}>Instant Results</h3>
-            <p style={{ color: 'var(--muted-foreground)' }}>No waiting for days. Get your optimized resume, interview questions, and action plan in minutes.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PricingSection() {
-  const { setStep } = useAppContext();
-
-  return (
-    <section id="pricing" className="section-padding">
-      <div className="container" style={{ textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '4rem' }}>Simple, Transparent Pricing</h2>
-        <div style={{
-          maxWidth: '400px',
-          margin: '0 auto',
-          padding: '3rem',
-          borderRadius: 'var(--radius)',
-          border: '2px solid var(--primary)',
-          position: 'relative'
-        }}>
-          <span className="badge" style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary)', color: 'white' }}>Most Popular</span>
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Pro Fix</h3>
-          <div style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>₹499</div>
-          <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>One-time payment</p>
-          <ul style={{ listStyle: 'none', padding: 0, textAlign: 'left', marginBottom: '2.5rem' }}>
-            <li style={{ marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>✅ Fully Rewritten Resume</li>
-            <li style={{ marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>✅ ATS Score Optimization</li>
-            <li style={{ marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>✅ 20+ Interview Q&A</li>
-            <li style={{ marginBottom: '0.75rem', display: 'flex', gap: '0.5rem' }}>✅ 7-Day Application Plan</li>
-          </ul>
-          <button className="btn btn-primary" style={{ width: '100%' }} onClick={() => setStep('upload')}>Get Started Now</button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--border)', background: 'var(--background)' }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-        <div style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--primary)' }}>ResumeFix</div>
-        <div style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>
-          © 2026 ResumeFix. Built for the Indian Job Market.
-        </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem' }}>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
-      </div>
-    </footer>
   );
 }
