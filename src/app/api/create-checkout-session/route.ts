@@ -17,6 +17,8 @@ export async function POST(req: NextRequest) {
         // Determine the base URL for success/cancel redirects
         const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
+        const planType = priceId === process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID ? 'standard' : 'pro';
+
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
@@ -27,7 +29,7 @@ export async function POST(req: NextRequest) {
                 },
             ],
             mode: "payment", // One-time payment
-            success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&plan=${planType}`,
             cancel_url: `${baseUrl}/`, // Send back to pricing if cancelled
         });
 

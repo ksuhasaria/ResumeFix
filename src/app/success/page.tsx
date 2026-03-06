@@ -1,10 +1,31 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, Suspense } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { event } from '@/components/MetaPixel';
+
+function PurchaseTracker() {
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const plan = searchParams.get('plan');
+        if (plan) {
+            const value = plan === 'standard' ? 29.00 : 99.00;
+            event('Purchase', { currency: 'USD', value });
+        }
+    }, [searchParams]);
+
+    return null;
+}
 
 export default function SuccessPage() {
     return (
         <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background)' }}>
+            <Suspense fallback={null}>
+                <PurchaseTracker />
+            </Suspense>
             <div className="container" style={{ maxWidth: '600px', textAlign: 'center', padding: '2rem' }}>
                 <div style={{ width: '80px', height: '80px', background: 'rgba(34, 197, 94, 0.1)', color: 'var(--success)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
                     <CheckCircle size={40} />

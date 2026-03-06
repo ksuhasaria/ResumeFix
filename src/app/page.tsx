@@ -4,6 +4,7 @@ import React from 'react';
 import { Sparkles, CheckCircle, Star, ArrowRight, ShieldCheck, Zap, Target, TrendingUp, Clock, AlertTriangle, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { event } from '@/components/MetaPixel';
 
 export default function SalesPage() {
     const [showSticky, setShowSticky] = useState(false);
@@ -21,6 +22,9 @@ export default function SalesPage() {
 
     const handleCheckout = async (plan: 'standard' | 'pro') => {
         setLoadingPlan(plan);
+        const value = plan === 'standard' ? 29.00 : 99.00;
+        event('InitiateCheckout', { currency: 'USD', value });
+
         try {
             const priceId = plan === 'standard'
                 ? process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID

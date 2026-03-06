@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from '@/context/AppContext';
+import MetaPixel from '@/components/MetaPixel';
 
 export const metadata: Metadata = {
   title: "ResumeFix | Land Your Dream Job in the US",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <AppProvider>
           {children}
         </AppProvider>
+        <MetaPixel />
       </body>
     </html>
   );
