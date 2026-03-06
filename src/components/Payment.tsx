@@ -9,14 +9,32 @@ export default function Payment() {
     const { setStep, markPaid } = useAppContext();
     const [loading, setLoading] = useState(false);
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         setLoading(true);
-        // Simulate payment gateway
-        setTimeout(() => {
+        try {
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    priceId: process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.url) {
+                // Redirect to Stripe Checkout
+                window.location.href = data.url;
+            } else {
+                console.error('Failed to create checkout session');
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error('Error:', error);
             setLoading(false);
-            markPaid();
-            setStep('analyzing');
-        }, 2000);
+        }
     };
 
     return (
@@ -44,8 +62,8 @@ export default function Payment() {
                     <div className="glass" style={{ padding: '2.5rem', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
                         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                             <p style={{ fontSize: '0.9rem', color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Amount</p>
-                            <h3 style={{ fontSize: '3rem', margin: '0.5rem 0' }}>₹499</h3>
-                            <p style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 600 }}>Special Indian Market Launch Price</p>
+                            <h3 style={{ fontSize: '3rem', margin: '0.5rem 0' }}>$29</h3>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 600 }}>Lifetime Access</p>
                         </div>
 
                         <div style={{ marginBottom: '2rem' }}>
@@ -55,7 +73,7 @@ export default function Payment() {
                                 onClick={handlePayment}
                                 disabled={loading}
                             >
-                                {loading ? 'Processing...' : 'Pay ₹499 via UPI/Card'}
+                                {loading ? 'Redirecting to Secure Checkout...' : 'Pay $29 securely'}
                             </button>
                         </div>
 

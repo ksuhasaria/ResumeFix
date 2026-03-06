@@ -17,9 +17,35 @@ export default function SalesPage() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleCheckout = (plan: 'standard' | 'pro') => {
-        // In a real app, redirect to Stripe/Razorpay checkout link
-        alert(`Redirecting to checkout for ${plan} plan...`);
+    const [loadingPlan, setLoadingPlan] = useState<'standard' | 'pro' | null>(null);
+
+    const handleCheckout = async (plan: 'standard' | 'pro') => {
+        setLoadingPlan(plan);
+        try {
+            const priceId = plan === 'standard'
+                ? process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID
+                : process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID;
+
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ priceId }),
+            });
+
+            const data = await response.json();
+
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                console.error('Failed to create checkout session');
+                setLoadingPlan(null);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setLoadingPlan(null);
+        }
     };
 
     return (
@@ -55,7 +81,7 @@ export default function SalesPage() {
                             style={{ fontSize: '1.25rem', padding: '1.25rem 2.5rem', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.3)', borderRadius: '99px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
                             onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
                         >
-                            Get Lifetime Access for ₹999 <ArrowRight size={20} />
+                            Get Lifetime Access for $29 <ArrowRight size={20} />
                         </button>
                         <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--muted-foreground)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
                             <ShieldCheck size={16} color="var(--success)" /> SECURE CHECKOUT • 100% MONEY-BACK GUARANTEE
@@ -154,7 +180,7 @@ export default function SalesPage() {
                             </div>
                             <div>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Secure Your Access</h3>
-                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>Lock in the ₹999 lifetime deal today. Checkout takes 30 seconds.</p>
+                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>Lock in the $29 lifetime deal today. Checkout takes 30 seconds.</p>
                             </div>
                         </div>
 
@@ -246,7 +272,7 @@ export default function SalesPage() {
                             <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Standard Access</h3>
                             <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>The ATS-beating template.</p>
 
-                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹999</div>
+                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>$29</div>
                             <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Lifetime access. Pay once.</p>
 
                             <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
@@ -268,8 +294,9 @@ export default function SalesPage() {
                                 className="btn"
                                 style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', background: 'var(--muted)', color: 'var(--foreground)' }}
                                 onClick={() => handleCheckout('standard')}
+                                disabled={loadingPlan === 'standard'}
                             >
-                                Buy Lifetime Access - ₹999
+                                {loadingPlan === 'standard' ? 'Redirecting...' : 'Buy Lifetime Access - $29'}
                             </button>
                         </div>
 
@@ -282,7 +309,7 @@ export default function SalesPage() {
                             <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>The 1% Bundle</h3>
                             <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>The unfair advantage.</p>
 
-                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>₹4999</div>
+                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>$99</div>
                             <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Complete toolkit package.</p>
 
                             <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
@@ -308,8 +335,9 @@ export default function SalesPage() {
                                 className="btn btn-primary"
                                 style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}
                                 onClick={() => handleCheckout('pro')}
+                                disabled={loadingPlan === 'pro'}
                             >
-                                Claim The Bundle - ₹4999
+                                {loadingPlan === 'pro' ? 'Redirecting...' : 'Claim The Bundle - $99'}
                             </button>
                         </div>
                     </div>
@@ -370,7 +398,7 @@ export default function SalesPage() {
                                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
                             }}
                         >
-                            Get Access For ₹999
+                            Get Access For $29
                         </button>
                         <style jsx>{`
               @media (min-width: 768px) {
