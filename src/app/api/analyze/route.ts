@@ -1,4 +1,11 @@
 import { NextResponse } from 'next/server';
+import OpenAI from 'openai';
+const pdf = require('pdf-parse');
+
+// Make sure to set OPENAI_API_KEY in your .env.local
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(request: Request) {
     try {
@@ -10,40 +17,69 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'File and role are required' }, { status: 400 });
         }
 
-        // In a real production app, you would:
-        // 1. Extract text from the PDF/DOCX using a library like pdf-parse or mammoth
-        // 2. US-Specific Master Prompt Strategy:
-        /*
-          const systemPrompt = `
+        if (!process.env.OPENAI_API_KEY) {
+            return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 });
+        }
+
+        // 1. Extract text from the PDF using pdf-parse
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        let extractedText = '';
+        try {
+            const pdfData = await pdf(buffer);
+            extractedText = pdfData.text;
+        } catch (err) {
+            console.error('PDF Parsing failed:', err);
+            return NextResponse.json({ error: 'Failed to read PDF file. Please ensure it is a valid PDF.' }, { status: 400 });
+        }
+
+        if (!extractedText || extractedText.trim().length === 0) {
+            return NextResponse.json({ error: 'Could not extract text from the PDF' }, { status: 400 });
+        }
+
+        // 2. US-Specific Master Prompt Strategy
+        const systemPrompt = `
             You are an elite executive recruiter and resume writer in the US Tech Market. 
             Analyze the following resume for the role of ${role}.
             Write exclusively in American English (e.g., analyze, optimize). 
             Adhere strictly to US corporate standards and the Harvard Business School / WSO (Wall Street Oasis) 1-column format.
             DO NOT include personal details like age, marital status, religion, or photos (which are illegal or frowned upon in US hiring).
             Convert all bullet points into high-impact, ROI-driven statements. Use strong action verbs.
-            Return a JSON object containing the ATS score, strengths, weaknesses, missing keywords, and the fully re-written resume text formatted for a clean serif (Times New Roman/Garamond) printout.
+            
+            Return a JSON object with the exact following keys:
+            - "score": A number out of 100 representing the ATS score.
+            - "strengths": An array of strings describing 2-3 strong points.
+            - "weaknesses": An array of strings describing 2-3 areas for improvement.
+            - "missingKeywords": An array of strings listing 3-5 important missing industry keywords.
+            - "atsCompatibility": A string, either "Low", "Medium", or "High".
+            - "rewrittenResume": A single string containing the fully re-written resume text formatted for a clean serif (Times New Roman/Garamond) printout. Format it clearly using plain text and basic spacing.
+            - "interviewQA": An array of objects, where each object has "question", "answer", and "tips" string fields, representing 3 potential interview questions based on the resume.
+            - "actionPlan": An array of objects, where each object has "day" (number), "task" (string), and "details" (string) fields, outlining a 7-day job application plan.
           `;
-        */
-        // 3. Send the text + role to an LLM (OpenAI/Gemini) with the above prompt
-        // 4. Return the structured analysis
 
-        // For now, we return mock data as requested for a "simple" build
-        const mockAnalysis = {
-            score: 72,
-            strengths: ['Relevant technical skills', 'Professional layout'],
-            weaknesses: ['Vague bullet points', 'Missing certifications section'],
-            missingKeywords: ['Agile', 'System Design', 'Team Leadership'],
-            atsCompatibility: 'Medium',
-            rewrittenResume: `REWRITTEN RESUME CONTENT FOR ${role.toUpperCase()}...`,
-            interviewQA: [
-                { question: 'What is your greatest strength?', answer: 'My ability to solve complex problems...', tips: 'Be specific.' }
+        const userPrompt = `Here is the raw extracted text from my resume:\n\n${extractedText}`;
+
+        // 3. Send the text + role to OpenAI
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini", // Cost-effective, fast, and highly capable
+            messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: userPrompt }
             ],
-            actionPlan: [
-                { day: 1, task: 'Fix Headline', details: 'Use the new headline from your optimized resume.' }
-            ]
-        };
+            response_format: { type: "json_object" }, // Guarantee JSON output
+        });
 
-        return NextResponse.json(mockAnalysis);
+        const rawResponse = completion.choices[0].message.content;
+
+        if (!rawResponse) {
+            throw new Error('No response from AI');
+        }
+
+        // 4. Return the structured analysis
+        const analysisData = JSON.parse(rawResponse);
+
+        return NextResponse.json(analysisData);
     } catch (error) {
         console.error('Analysis error:', error);
         return NextResponse.json({ error: 'Failed to analyze resume' }, { status: 500 });
