@@ -12,8 +12,20 @@ export async function POST(request: Request) {
 
         // In a real production app, you would:
         // 1. Extract text from the PDF/DOCX using a library like pdf-parse or mammoth
-        // 2. Send the text + role to an LLM (OpenAI/Gemini)
-        // 3. Return the structured analysis
+        // 2. US-Specific Master Prompt Strategy:
+        /*
+          const systemPrompt = `
+            You are an elite executive recruiter and resume writer in the US Tech Market. 
+            Analyze the following resume for the role of ${role}.
+            Write exclusively in American English (e.g., analyze, optimize). 
+            Adhere strictly to US corporate standards and the Harvard Business School / WSO (Wall Street Oasis) 1-column format.
+            DO NOT include personal details like age, marital status, religion, or photos (which are illegal or frowned upon in US hiring).
+            Convert all bullet points into high-impact, ROI-driven statements. Use strong action verbs.
+            Return a JSON object containing the ATS score, strengths, weaknesses, missing keywords, and the fully re-written resume text formatted for a clean serif (Times New Roman/Garamond) printout.
+          `;
+        */
+        // 3. Send the text + role to an LLM (OpenAI/Gemini) with the above prompt
+        // 4. Return the structured analysis
 
         // For now, we return mock data as requested for a "simple" build
         const mockAnalysis = {

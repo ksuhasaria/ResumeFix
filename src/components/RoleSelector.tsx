@@ -24,7 +24,7 @@ export default function RoleSelector() {
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Step 2: What's your target role?</h2>
-                    <p style={{ color: 'var(--muted-foreground)' }}>We'll optimize your resume specifically for this job category in India.</p>
+                    <p style={{ color: 'var(--muted-foreground)' }}>We'll optimize your resume specifically for this job category in the US.</p>
                 </div>
 
                 <div style={{
@@ -71,7 +71,7 @@ export default function RoleSelector() {
                         onClick={() => setStep('payment')}
                         style={{ padding: '0.75rem 1rem', opacity: !state.selectedRole ? 0.5 : 1, flex: '2 1 auto' }}
                     >
-                        Confirm & Proceed to Payment ₹499 <ChevronRight size={18} />
+                        Confirm & Proceed to Payment $29 <ChevronRight size={18} />
                     </button>
                 </div>
             </div>

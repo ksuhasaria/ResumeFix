@@ -32,7 +32,7 @@ export default function Results() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                         <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Your Optimized Profile</h2>
-                        <p style={{ color: 'var(--muted-foreground)' }}>Tailored for <strong>{state.selectedRole}</strong> roles in India.</p>
+                        <p style={{ color: 'var(--muted-foreground)' }}>Tailored for <strong>{state.selectedRole}</strong> roles in the US Tech Market.</p>
                     </div>
                     <button className="btn btn-primary" onClick={downloadPDF}>
                         <Download size={18} /> Download Optimized Resume (PDF)
@@ -73,7 +73,7 @@ export default function Results() {
                                         </div>
                                         <div>
                                             <p style={{ fontWeight: 600, fontSize: '1.1rem' }}>ATS Compatibility: {state.analysisResult?.atsCompatibility}</p>
-                                            <p style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>Based on Indian recruitment standards.</p>
+                                            <p style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>Based on US corporate recruitment standards (Fortune 500 & Startups).</p>
                                         </div>
                                     </div>
 
@@ -119,8 +119,8 @@ export default function Results() {
 
                     {activeTab === 'resume' && (
                         <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
-                            <div id="rewritten-resume-content" style={{ padding: '2rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)', background: 'white', color: 'black', fontFamily: 'serif' }}>
-                                <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: '0.95rem' }}>
+                            <div id="rewritten-resume-content" style={{ padding: '3rem 2rem', border: '1px solid var(--border)', borderRadius: 'var(--radius)', background: 'white', color: 'black', fontFamily: 'Times New Roman, Garamond, serif' }}>
+                                <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: '1.05rem', lineHeight: '1.6', maxWidth: '8.5in', margin: '0 auto', textAlign: 'left' }}>
                                     {state.rewrittenResume}
                                 </pre>
                             </div>
