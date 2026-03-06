@@ -22,6 +22,18 @@ This document serves as the single source of truth for the ResumeFix project, tr
 - [x] Backend route `/api/create-checkout-session` implemented.
 - [x] Frontend checkout buttons wired to initiate secure Stripe checkout.
 
+## 2.5 Frontend Conversion Rate Optimization (CRO) Suggestions
+While the structure is strong (Pabbly style long-form), adding the following elements will significantly decrease your Meta Ads Cost Per Acquisition (CPA) for the US market:
+
+- [ ] **Video Sales Letter (VSL) / Demo GIF:** Replace or supplement the "Before/After" screenshot with an autoplaying 15-second visual showing a messy Canva resume physically restructuring itself into the pristine Harvard 1-column template. Seeing is believing.
+- [ ] **Founder's Story (Authority Building):** Faceless tools struggle to command $99. Add a short "Why I built this" letter from a persona (e.g., "After reviewing 10,000+ resumes at Meta..."). This builds deep, relatable trust.
+- [x] **Granular FAQ (Objection Destruction):** Dedicate a section explicitly addressing US tech anxieties:
+  - *Will Workday/Taleo flag this as AI-generated?*
+  - *Is my personal data used to train your models?*
+  - *Does this work for Staff/Principal level engineering roles, or just entry-level?*
+- [ ] **Friction-Reducing Microcopy:** Add subtext immediately below the `$29` and `$99` checkout buttons (e.g., *"Takes 30 seconds. No forced account creation. 100% Secure Stripe Checkout."*).
+- [ ] **Exit-Intent Downsell (Advanced):** If a user attempts to close the tab, trigger a pop-up offering *just* the "500+ Power-Verbs DB and Cold Email Scripts" for a low-friction $9 impulse buy to recover ad spend.
+
 ## 3. Pending Implementation: Backend MVP & Tracking
 
 This is the immediate next phase required before launching Meta Ads.
@@ -41,6 +53,7 @@ This is the immediate next phase required before launching Meta Ads.
 - [x] Connect OpenAI/Anthropic API to the Next.js backend.
 - [x] Feed extracted PDF text + the pre-drafted "US Market Master Prompt" to the LLM.
 - [x] Return real JSON data to populate the UI (replacing the current hardcoded mock data).
+- [ ] Add `OPENAI_API_KEY` to Vercel Environment Variables.
 
 ### D. Meta Pixel Tracking (Critical)
 - [x] Install Meta Pixel script in `layout.tsx`.

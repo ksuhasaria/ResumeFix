@@ -352,8 +352,60 @@ export default function SalesPage() {
                 </div>
             </section>
 
+            {/* FAQ / Objection Handling */}
+            <section style={{ padding: '5rem 1rem', background: 'var(--muted)' }}>
+                <div className="container" style={{ maxWidth: '800px' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
+                            Frequently Asked Questions
+                        </h2>
+                        <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem' }}>
+                            Everything you need to know about the product and billing.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <div style={{ background: 'var(--card)', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--border)' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--primary)', fontWeight: 900 }}>Q.</span> Will Workday, Taleo, or Greenhouse ATS flag this as AI-generated?
+                            </h3>
+                            <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
+                                <span style={{ color: 'var(--foreground)', fontWeight: 600 }}>No.</span> Most modern Applicant Tracking Systems do not have native "AI detectors." They parse for keywords, structure, and readability. Our AI engine is specifically instructed to output standard, professional corporate English without the "robotic" jargon commonly associated with ChatGPT, ensuring you pass human review.
+                            </p>
+                        </div>
+
+                        <div style={{ background: 'var(--card)', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--border)' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--primary)', fontWeight: 900 }}>Q.</span> Is my personal resume data used to train your AI?
+                            </h3>
+                            <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
+                                <span style={{ color: 'var(--foreground)', fontWeight: 600 }}>Absolutely not.</span> We interface with enterprise-grade models via secure APIs. Your data is processed for the sole purpose of generating your new resume and is never saved, sold, or used to train public language models.
+                            </p>
+                        </div>
+
+                        <div style={{ background: 'var(--card)', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--border)' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--primary)', fontWeight: 900 }}>Q.</span> Does this only work for entry-level, or can it handle Staff/Principal roles?
+                            </h3>
+                            <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
+                                <span style={{ color: 'var(--foreground)', fontWeight: 600 }}>It handles all levels.</span> The system extracts your raw experience and reframes it around business impact and ROI. Whether you are an Entry-Level analyst outlining a college project, or a Principal Engineer detailing a $10M microservice migration, the formatting output scales perfectly to highlight executive leadership.
+                            </p>
+                        </div>
+
+                        <div style={{ background: 'var(--card)', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--border)' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                <span style={{ color: 'var(--primary)', fontWeight: 900 }}>Q.</span> Is this a subscription? Will I be charged again next month?
+                            </h3>
+                            <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
+                                <span style={{ color: 'var(--foreground)', fontWeight: 600 }}>Pay once. Use forever.</span> This is a strict D2C lifetime deal. You pay a single flat fee ($29 or $99) securely through Stripe today, and you retain access to the tool forever to update your resume for future job changes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Guarantee */}
-            <section style={{ padding: '0 1rem 5rem' }}>
+            <section style={{ padding: '5rem 1rem', background: 'var(--background)' }}>
                 <div className="container" style={{ maxWidth: '800px' }}>
                     <div style={{ background: 'var(--muted)', borderRadius: '1rem', padding: '3rem', display: 'flex', gap: '2rem', alignItems: 'center' }}>
                         <div style={{ color: 'var(--success)', flexShrink: 0 }}>
