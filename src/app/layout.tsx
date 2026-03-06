@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AppProvider } from '@/context/AppContext';
 import MetaPixel from '@/components/MetaPixel';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "ResumeFix | Land Your Dream Job in the US",
@@ -21,6 +22,7 @@ export default function RootLayout({
           {children}
         </AppProvider>
         <MetaPixel />
+        <Analytics />
       </body>
     </html>
   );
