@@ -53,12 +53,13 @@ This is the immediate next phase required before launching Meta Ads.
 - [x] Connect OpenAI/Anthropic API to the Next.js backend.
 - [x] Feed extracted PDF text + the pre-drafted "US Market Master Prompt" to the LLM.
 - [x] Return real JSON data to populate the UI (replacing the current hardcoded mock data).
-- [ ] Add `OPENAI_API_KEY` to Vercel Environment Variables.
+- [x] Add `OPENAI_API_KEY` to Vercel Environment Variables.
 
-### D. Meta Pixel Tracking (Critical)
+### D. Meta Pixel & Vercel Tracking (Critical)
 - [x] Install Meta Pixel script in `layout.tsx`.
 - [x] Configure standard events: `ViewContent` (Home), `InitiateCheckout` (Button Click), and `Purchase` (Success metrics with $ value).
 - [ ] Add `NEXT_PUBLIC_FACEBOOK_PIXEL_ID` to Vercel Environment Variables and redeploy.
+- [x] Installed and configured `@vercel/analytics` natively in Next.js layout.
 
 ## 4. Final Verification & Launch
 - [ ] Perform End-to-End Test (Stripe Test Mode -> Email Received -> Click Magic Link -> Upload PDF -> AI Generation works).
