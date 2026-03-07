@@ -50,15 +50,15 @@ function SuccessContent() {
                 </div>
             </nav>
 
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
-                <div style={{ background: 'var(--card)', padding: '4rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border)', textAlign: 'center', maxWidth: '600px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', color: 'var(--success)' }}>
-                        <CheckCircle size={80} />
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+                <div style={{ background: 'var(--card)', padding: 'clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem)', borderRadius: '1.5rem', border: '1px solid var(--border)', textAlign: 'center', maxWidth: '600px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--success)' }}>
+                        <CheckCircle size={64} />
                     </div>
-                    <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                    <h1 style={{ fontSize: 'clamp(1.75rem, 7vw, 2.5rem)', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
                         Payment Successful.
                     </h1>
-                    <p style={{ color: 'var(--muted-foreground)', fontSize: '1.2rem', marginBottom: '3rem', lineHeight: 1.6 }}>
+                    <p style={{ color: 'var(--muted-foreground)', fontSize: 'clamp(1rem, 4vw, 1.2rem)', marginBottom: '2.5rem', lineHeight: 1.6 }}>
                         A receipt and your magic login link will be sent to your email shortly. If you don't receive it within 5 minutes, please check your spam folder.
                     </p>
 

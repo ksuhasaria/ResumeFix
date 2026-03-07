@@ -125,11 +125,11 @@ export default function ExitIntentPopup() {
                         </div>
 
                         {/* Content */}
-                        <div style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                            <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.2 }}>
+                        <div style={{ padding: 'clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 5vw, 2rem)', textAlign: 'center' }}>
+                            <h2 style={{ fontSize: 'clamp(1.5rem, 6vw, 2rem)', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.2 }}>
                                 Don't leave empty handed. Get the core assets.
                             </h2>
-                            <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: 1.6 }}>
+                            <p style={{ color: 'var(--muted-foreground)', fontSize: 'clamp(0.95rem, 3vw, 1.1rem)', marginBottom: '2rem', lineHeight: 1.6 }}>
                                 Not ready for the full AI system? Grab our proprietary databases used by recruiters to instantly upgrade any resume or email.
                             </p>
 
@@ -156,7 +156,7 @@ export default function ExitIntentPopup() {
 
                             <button
                                 className="btn btn-primary"
-                                style={{ width: '100%', fontSize: '1.25rem', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem' }}
+                                style={{ width: '100%', fontSize: 'clamp(1.1rem, 4vw, 1.25rem)', padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem' }}
                                 onClick={handleCheckout}
                                 disabled={loading}
                             >
