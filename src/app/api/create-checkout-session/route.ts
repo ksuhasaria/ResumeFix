@@ -2,13 +2,13 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-// Initialize Stripe with the secret key from the environment
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2026-02-25.clover" as any,
-});
-
 export async function POST(req: NextRequest) {
     try {
+        // Initialize Stripe inside handler to avoid build-time key validation issues
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+            apiVersion: "2026-02-25.clover" as any,
+        });
+
         const { priceId } = await req.json();
 
         if (!priceId) {

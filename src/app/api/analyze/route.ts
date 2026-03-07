@@ -1,15 +1,11 @@
 export const dynamic = 'force-dynamic';
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
-const pdf = require('pdf-parse');
-
-// Make sure to set OPENAI_API_KEY in your .env.local
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function POST(request: Request) {
     try {
+        const pdf = require('pdf-parse');
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+
         const data = await request.formData();
         const file = data.get('file') as File;
         const role = data.get('role') as string;
