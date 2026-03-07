@@ -1,54 +1,52 @@
-# 🚀 Meta Ads & US Market Conversion Improvements
+# 🚀 Pricing & CTA Redesign Plan (Meta Ads Focus)
 
-To succeed with **cold Meta Ads traffic** in the US tech market (where users are skeptical and have short attention spans), we need to move from a "tool" to a "solution."
+## I. The Problem with Current Pricing
 
-## I. High-Impact Content Ideas (The "Hook")
+1.  **Too Much Choice (Paradox of Choice):** Two plans ($29 and $99) side-by-side make the user stop and think. High friction on cold traffic.
+2.  **Confusing "Get Access for $29" CTA:** The sticky banner promises $29, but then scrolls them to a section where they see a $99 option. This feels like a bait-and-switch or causes hesitation.
+3.  **Low Value Perception:** A basic two-column pricing table feels like SaaS software, not an "insider career tool" or a limited-time high-value bundle.
 
-### 1. "The Recruiter's View" Video/GIF (VSL)
-*   **The Idea:** A 10-second side-by-side video. Left side: A recruiter's screen showing a Greenhouse/Workday dashboard where a "Canva" resume is parsed as gibberish. Right side: The ResumeFix resume appearing as a clean, structured profile with a "98% Match" score.
-*   **Why:** Meta users watch videos/GIFs more than they read. This visually communicates the "Dumb Software" pain point instantly.
+## II. The Solution: "The One Offer" Approach (Direct Response Style)
 
-### 2. "The Taleo/Workday Survival Guide" (Lead Magnet)
-*   **The Idea:** Add a small section offering a free "ATS Cheat Sheet" in exchange for an email (or as a bonus after purchase).
-*   **Why:** US tech job seekers are terrified of "ATS Black Holes." Position ResumeFix as the only bridge across that hole.
+For impulse buys on Meta, we need **One Clear Offer** that feels like an absolute steal, with zero choices to make on the main page. A bump offer (the $99 stuff) should happen *after* they decide to buy the main thing, or we just sell one high-value bundle outright.
 
-### 3. "M7 Ivy League" Template Branding
-*   **The Idea:** Explicitly name the template "The Harvard/Stanford 1-Column Standard." 
-*   **Why:** In the US, the "Standard Investment Banking/Top Tech" layout is a specific 1-column serif design. Giving it a name like "Elite M7 Template" increases perceived value.
+### Option A: The "Godfather" Bundle (Single Price Point - Recommended)
+
+*   **Concept:** Kill the $29 VS $99 confusion. We offer ONE package.
+*   **The Price:** $49 (or $39/$49 depending on testing).
+*   **The Pitch:** "The Complete M7 Interview Protocol." It contains the resume engine + the bonuses (verbs, email scripts).
+*   **Visuals:** Instead of a pricing comparison table, it's a massive "Stack" visual indicating insane value.
+*   **Example Layout:**
+    *   **Headline:** Get The Complete M7 Protocol Today
+    *   **Checklist (The Stack):**
+        *   ✅ Lifetime ResumeFix AI Engine ($299 Value)
+        *   ✅ The 500+ Power-Verbs DB ($49 Value)
+        *   ✅ 5 Proven Cold Email Scripts ($99 Value)
+        *   ✅ LinkedIn Opt. Checklist ($49 Value)
+    *   **Total Value:** <strike>$496</strike>
+    *   **Today's Price:** **$49** (One-Time)
+    *   **Button:** Lock In Lifetime Access Now
+*   **Why this works:** The CTA buttons everywhere ("Get Access for $49") map 1:1 to exactly what they see. No scrolling, no decisions. Just "Yes" or "No."
+
+### Option B: The "Core + Order Bump" (Checkout Upsell)
+
+*   **Concept:** Keep the $29 offer on the main page. But remove the $99 box completely from `page.tsx`.
+*   **The Pitch (Main Page):** You are purely selling the AI Resume Engine for $29. The whole page only talks about this.
+*   **The Upsell:** When they click "Get Access for $29", they go to a custom checkout page (or a Stripe checkout with an Order Bump enabled). There, they see: *"Wait! Add the '1% Bundle' (Verbs, Scripts, Review) for just $49 more."*
+*   **Why this works:** It keeps the entry price low ($29) to get high CTR and conversion, but captures the higher AOV on the backend where they are already in buying mode.
+
+## III. Changes Needed Based on Chosen Approach
+
+If **Option A (Single Bundle)** is chosen:
+1.  Completely remove the 2-column pricing grid in `page.tsx`.
+2.  Replace it with a single, high-converting "Offer Stack" box.
+3.  Update all sticky CTAs and Hero buttons to reflect the single price.
+4.  Update Stripe integration to use the single price ID.
+
+If **Option B (Core + Upsell)** is chosen:
+1.  Remove the "Pro" pricing box from `page.tsx`. Center the "Standard" box.
+2.  Make the copy laser-focused on the $29 value.
+3.  We will need to configure Stripe to offer the Pro package as a cross-sell/upsell during the checkout flow, or build a custom intermediary page before Stripe.
 
 ---
-
-## II. Frontend UX & CRO Improvements
-
-### 1. "Live" Multi-Step Social Proof
-*   **Change:** Add a small "Live Activity" bubble (e.g., *"John D. from Austin, TX just secured a Google interview"*).
-*   **Why:** Builds "Fear Of Missing Out" (FOMO) and proves the tool is being used by real people in the US.
-
-### 2. Interactive "ATS Readiness" Quiz
-*   **Change:** Instead of just a "Buy" button, have a "Check My Resume Score" button that leads to a quick 3-question quiz.
-*   **The Hook:** "Does your resume have columns? [Yes/No]" -> "Warning: Columns block 80% of ATS parsers."
-*   **Why:** Interactive elements lower the "Wall of Sale" and get the user invested before you ask for money.
-
----
-
-## III. US Market Trust signals
-
-### 1. "Built in San Francisco/Austin" Branding
-*   **The Idea:** Add a "Proudly built by hiring managers in [US Tech Hub]" in the footer.
-*   **Why:** Increases trust for US-based shoppers who might be wary of international tools handling their personal data.
-
-### 2. Explicit Privacy "No-Sell" Guarantee
-*   **The Idea:** A dedicated box: "We never sell your data to recruiters or third parties. Your resume remains your property."
-*   **Why:** Privacy is a top-3 concern for US job seekers in the AI age.
-
----
-
-## IV. Updated Action Plan (Priority List)
-
-| Priority | Feature | Category | Effort |
-| :--- | :--- | :--- | :--- |
-| **High** | 15s Autoplay Demo GIF (The Mechanism) | Content | Med |
-| **Med** | "Recruiter Eye-Tracking" Heatmap Animation | Visual | Med |
-| **Med** | "Elite M7" Template Branding/Naming | Content | Low |
-| **Med** | Interactive "ATS Readiness" Quiz | CRO | Med |
-| **Low** | Live Social Proof Bubble | CRO | Med |
+**ACTION REQUIRED:** User needs to review this document and select **Option A** or **Option B** before we proceed with implementation.

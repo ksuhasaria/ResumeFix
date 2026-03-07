@@ -174,7 +174,7 @@ export default function SalesPage() {
                                 <span style={{ color: 'var(--primary)' }}>2.4x More Callbacks</span>
                             </h2>
                             <p style={{ color: 'var(--muted-foreground)', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-                                We analyzed 500+ users before and after optimization. The result? A massive jump in interview conversion rates.
+                                We analyzed 5000+ users before and after optimization. The result? A massive jump in interview conversion rates.
                             </p>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--muted)', padding: '0.75rem 1rem', borderRadius: '0.75rem' }}>
@@ -259,7 +259,7 @@ export default function SalesPage() {
             <section style={{ padding: '5rem 1rem', background: 'var(--muted)' }}>
                 <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
                     <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
-                        No tedious forms. No forced uploads on mobile.
+                        No tedious forms. No forced uploads.
                     </h2>
                     <p style={{ color: 'var(--muted-foreground)', fontSize: '1.15rem', marginBottom: '4rem', lineHeight: 1.6 }}>
                         You buy the lifetime access now. You use it whenever you want. Your personal AI vault will be waiting for you.
@@ -282,7 +282,7 @@ export default function SalesPage() {
                             </div>
                             <div>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Check Your Email</h3>
-                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>You instantly receive a magic login link to your private Antigravity vault. It never expires.</p>
+                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>You instantly receive a magic login link to your private vault. It never expires.</p>
                             </div>
                         </div>
 
@@ -291,8 +291,8 @@ export default function SalesPage() {
                                 3
                             </div>
                             <div>
-                                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Upload Later & Generate</h3>
-                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>Whenever you are ready on your desktop, drop in your old resume. The AI rewrites it in 3 minutes.</p>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>Upload & Generate</h3>
+                                <p style={{ color: 'var(--muted-foreground)', lineHeight: 1.5 }}>Whenever you are ready, drop in your old resume, and see the magic happen.</p>
                             </div>
                         </div>
                     </div>
@@ -513,7 +513,7 @@ export default function SalesPage() {
                     <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--foreground)' }}>
                         Proudly built by hiring managers in San Francisco, CA.
                     </div>
-                    <p style={{ fontSize: '0.8rem', opacity: 0.8 }}>ResumeFix is a product of Antigravity Labs.</p>
+                    <p style={{ fontSize: '0.8rem', opacity: 0.8 }}>ResumeFix is a product of Creative Labs.</p>
                 </div>
             </footer>
 
