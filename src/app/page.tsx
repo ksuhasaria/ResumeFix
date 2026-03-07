@@ -153,6 +153,90 @@ export default function SalesPage() {
                 </div>
             </section>
 
+            {/* NEW SECTION: Statistical Proof Section */}
+            <section style={{ padding: '4rem 1rem', background: 'var(--card)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                <div className="container" style={{ maxWidth: '1000px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+                        <div>
+                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                                Numbers Don't Lie.<br />
+                                <span style={{ color: 'var(--primary)' }}>2.4x More Callbacks</span>
+                            </h2>
+                            <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+                                We analyzed 500+ users before and after optimization. The result? A consistent, massive jump in interview conversion rates because recruiters can finally find your impact in under 6 seconds.
+                            </p>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--muted)', padding: '1rem', borderRadius: '0.75rem' }}>
+                                    <TrendingUp size={24} color="var(--success)" />
+                                    <div>
+                                        <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>+140% Callback Rate</div>
+                                        <div style={{ fontSize: '0.85rem', color: 'var(--muted-foreground)' }}>Average increase for tech roles</div>
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'var(--muted)', padding: '1rem', borderRadius: '0.75rem' }}>
+                                    <Clock size={24} color="var(--primary)" />
+                                    <div>
+                                        <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>75% Faster Review Time</div>
+                                        <div style={{ fontSize: '0.85rem', color: 'var(--muted-foreground)' }}>ATS systems parse our format instantly</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ position: 'relative' }}>
+                            <img
+                                src="/ats_score_chart_mockup_1772882887158.png"
+                                alt="Interview Callback Growth Chart"
+                                style={{ width: '100%', borderRadius: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)' }}
+                            />
+                            {/* Overlay Trust Element */}
+                            <div style={{ position: 'absolute', bottom: '-1.5rem', right: '2rem', background: 'var(--background)', padding: '1rem 1.5rem', borderRadius: '1rem', border: '1px solid var(--border)', boxShadow: '0 10px 20px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <ShieldCheck size={24} color="var(--success)" />
+                                <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Verified User Data</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* NEW SECTION: Heatmap Section */}
+            <section style={{ padding: '6rem 1rem', background: 'var(--background)' }}>
+                <div className="container" style={{ maxWidth: '1000px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+                        <div style={{ order: 2 }}>
+                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                                Stop Hiding Your Talent In the "Gray Zones"
+                            </h2>
+                            <p style={{ color: 'var(--muted-foreground)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+                                Recruiters only look at your resume for 6.25 seconds. If your impact isn't in their line of sight, you're invisible. ResumeFix re-engineered the 1-column layout to guide their eyes exactly where you want them.
+                            </p>
+                            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                                    <Target size={24} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                    <div>
+                                        <div style={{ fontWeight: 700 }}>Eye-Tracking Optimization</div>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--muted-foreground)' }}>Our layout ensures bullet points are read, not skimmed.</div>
+                                    </div>
+                                </li>
+                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                                    <Zap size={24} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                    <div>
+                                        <div style={{ fontWeight: 700 }}>ROI-First Content Hierarchy</div>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--muted-foreground)' }}>The most impressive numbers are placed for maximum impact.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style={{ order: 1 }}>
+                            <img
+                                src="/resume_heat_map_mockup_1772882903980.png"
+                                alt="Recruiter Eye-Tracking Heatmap"
+                                style={{ width: '100%', borderRadius: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)' }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Social Proof Bar */}
             <section style={{ padding: '2rem 1rem', background: 'var(--primary)', color: 'white', textAlign: 'center' }}>
                 <div className="container">
