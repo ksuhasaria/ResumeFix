@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
 import { Download, Check, AlertCircle, TrendingUp, Calendar, HelpCircle, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 
 export default function Results() {
     const { state, setStep } = useAppContext();
@@ -14,6 +13,10 @@ export default function Results() {
     const downloadPDF = async () => {
         const element = document.getElementById('rewritten-resume-content');
         if (!element) return;
+
+        // Dynamically import for client-side only to fix DOMMatrix build error
+        const jsPDF = (await import('jspdf')).default;
+        const html2canvas = (await import('html2canvas')).default;
 
         const canvas = await html2canvas(element, { scale: 2 });
         const imgData = canvas.toDataURL('image/png');
