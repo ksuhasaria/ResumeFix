@@ -87,9 +87,10 @@ export default function SalesPage() {
                             <button
                                 className="btn btn-primary"
                                 style={{ fontSize: '1.25rem', padding: '1.25rem 2.5rem', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.3)', borderRadius: '99px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
-                                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                                onClick={handleCheckout}
+                                disabled={loadingCheckout}
                             >
-                                Get Lifetime Access for $29 <ArrowRight size={20} />
+                                {loadingCheckout ? 'Securing Access...' : 'Get Lifetime Access for $29'} <ArrowRight size={20} />
                             </button>
                             <button
                                 onClick={() => setIsQuizOpen(true)}
@@ -543,11 +544,10 @@ export default function SalesPage() {
                         <button
                             className="btn btn-primary"
                             style={{ width: '100%', maxWidth: '400px', fontSize: '1.1rem', padding: '0.8rem 1rem', boxShadow: '0 4px 15px rgba(79, 70, 229, 0.4)' }}
-                            onClick={() => {
-                                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-                            }}
+                            onClick={handleCheckout}
+                            disabled={loadingCheckout}
                         >
-                            Get Access For $29
+                            {loadingCheckout ? 'Securing Access...' : 'Get Access For $29'}
                         </button>
                         <style jsx>{`
               @media (min-width: 768px) {
