@@ -21,17 +21,15 @@ export default function SalesPage() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const [loadingPlan, setLoadingPlan] = useState<'standard' | 'pro' | null>(null);
+    const [loadingCheckout, setLoadingCheckout] = useState(false);
 
-    const handleCheckout = async (plan: 'standard' | 'pro') => {
-        setLoadingPlan(plan);
-        const value = plan === 'standard' ? 29.00 : 99.00;
+    const handleCheckout = async () => {
+        setLoadingCheckout(true);
+        const value = 29.00;
         event('InitiateCheckout', { currency: 'USD', value });
 
         try {
-            const priceId = plan === 'standard'
-                ? process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID
-                : process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID;
+            const priceId = process.env.NEXT_PUBLIC_STRIPE_STANDARD_PRICE_ID;
 
             const response = await fetch('/api/create-checkout-session', {
                 method: 'POST',
@@ -47,11 +45,11 @@ export default function SalesPage() {
                 window.location.href = data.url;
             } else {
                 console.error('Failed to create checkout session');
-                setLoadingPlan(null);
+                setLoadingCheckout(false);
             }
         } catch (error) {
             console.error('Error:', error);
-            setLoadingPlan(null);
+            setLoadingCheckout(false);
         }
     };
 
@@ -375,97 +373,56 @@ export default function SalesPage() {
                         Skip the subscription traps. Get lifetime access to the most powerful AI resume rewriter for one flat fee.
                     </p>
 
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr',
-                        gap: '2rem',
-                        maxWidth: '900px',
-                        margin: '0 auto',
-                        '@media (min-width: 768px)': { gridTemplateColumns: '1fr 1fr' }
-                    } as any}>
-                        {/* Standard Plan */}
-                        <div style={{ background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Standard Access</h3>
-                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>The Harvard/Stanford M7 template.</p>
-
-                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>$29</div>
-                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Lifetime access. Pay once.</p>
-
-                            <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span>HR-Friendly Structure Optimization</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span>Professional AI Content Rewriting</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span>Uncapped Resume Exports</span>
-                                </li>
-                            </ul>
-
-                            <button
-                                className="btn"
-                                style={{ width: '100%', fontSize: '1.1rem', padding: '1rem', background: 'var(--muted)', color: 'var(--foreground)' }}
-                                onClick={() => handleCheckout('standard')}
-                                disabled={loadingPlan === 'standard'}
-                            >
-                                {loadingPlan === 'standard' ? 'Redirecting...' : 'Buy Lifetime Access - $29'}
-                            </button>
-                            <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--muted-foreground)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><ShieldCheck size={14} color="var(--success)" /> 100% Secure Stripe Checkout</div>
-                                <div>Takes 30 seconds. No account required.</div>
-                            </div>
-                        </div>
-
-                        {/* Pro Plan */}
-                        <div style={{ background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '2px solid var(--primary)', position: 'relative', display: 'flex', flexDirection: 'column', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.15)' }}>
-                            <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'var(--primary)', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600 }}>
-                                Most Optimal
+                    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                        <div style={{ background: 'var(--card)', padding: 'clamp(2rem, 5vw, 3rem)', borderRadius: '1.5rem', border: '2px solid var(--primary)', position: 'relative', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 50px rgba(79, 70, 229, 0.15)' }}>
+                            <span style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', background: 'var(--primary)', color: 'white', padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                                The Elite M7 Protocol
                             </span>
 
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>The 1% Bundle</h3>
-                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Total Perceived Value: <span style={{ textDecoration: 'line-through' }}>$695</span></p>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--foreground)' }}>Complete Lifetime Access</h3>
+                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '1rem' }}>Total Real Value: <span style={{ textDecoration: 'line-through', opacity: 0.7 }}>$496</span></p>
 
-                            <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>$99</div>
-                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Complete toolkit package.</p>
+                            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '0.25rem', marginBottom: '0.5rem' }}>
+                                <span style={{ fontSize: '1.5rem', fontWeight: 700, marginTop: '0.5rem' }}>$</span>
+                                <span style={{ fontSize: '4rem', fontWeight: 900, lineHeight: 1 }}>29</span>
+                            </div>
+                            <p style={{ color: 'var(--success)', fontWeight: 600, marginBottom: '2.5rem', fontSize: '0.9rem' }}>One-time payment. No subscriptions.</p>
 
-                            <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1 }}>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span><b>Lifetime ResumeFix AI Engine</b> ($299 Value)</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span><b>The 500+ Power-Verbs DB</b> ($49 Value)</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span><b>5 Proven Cold Email Scripts</b> ($99 Value)</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span><b>LinkedIn Opt. Checklist</b> ($49 Value)</span>
-                                </li>
-                                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
-                                    <span><b>Priority Async Expert Review</b> ($199 Value)</span>
-                                </li>
-                            </ul>
+                            {/* The Stack */}
+                            <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', marginBottom: '2.5rem' }}>
+                                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem', textAlign: 'left' }}>What You Get Today:</div>
+                                <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                        <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                        <span style={{ fontSize: '1.05rem', fontWeight: 500 }}><b style={{ color: 'var(--foreground)' }}>ResumeFix AI Engine</b> ($299 Value)</span>
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                        <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                        <span style={{ fontSize: '1.05rem', fontWeight: 500 }}><b style={{ color: 'var(--foreground)' }}>The Elite M7 ATS Layout</b> ($49 Value)</span>
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                        <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                        <span style={{ fontSize: '1.05rem', fontWeight: 500 }}><b style={{ color: 'var(--foreground)' }}>500+ Power-Verbs DB</b> ($49 Value)</span>
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                        <CheckCircle size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
+                                        <span style={{ fontSize: '1.05rem', fontWeight: 500 }}><b style={{ color: 'var(--foreground)' }}>5 Cold Email Scripts</b> ($99 Value)</span>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <button
                                 className="btn btn-primary"
-                                style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}
-                                onClick={() => handleCheckout('pro')}
-                                disabled={loadingPlan === 'pro'}
+                                style={{ width: '100%', fontSize: '1.25rem', padding: '1.25rem', fontWeight: 700, borderRadius: '99px', boxShadow: '0 10px 25px rgba(79, 70, 229, 0.4)' }}
+                                onClick={handleCheckout}
+                                disabled={loadingCheckout}
                             >
-                                {loadingPlan === 'pro' ? 'Redirecting...' : 'Claim The Bundle - $99'}
+                                {loadingCheckout ? 'Securing Access...' : 'Lock In Lifetime Access - $29'}
                             </button>
-                            <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--muted-foreground)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><ShieldCheck size={14} color="var(--success)" /> 100% Secure Stripe Checkout</div>
-                                <div>Takes 30 seconds. Instant Access.</div>
+
+                            <div style={{ marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--muted-foreground)', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><ShieldCheck size={16} color="var(--success)" /> 100% Secure Stripe Checkout</div>
+                                <div>Takes 30 seconds. Instant magic link delivery.</div>
                             </div>
                         </div>
                     </div>
