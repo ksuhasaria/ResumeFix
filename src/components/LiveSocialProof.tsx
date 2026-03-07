@@ -107,7 +107,8 @@ export default function LiveSocialProof() {
                     <style jsx>{`
             @media (max-width: 768px) {
               .social-proof-toast {
-                bottom: 5rem !important; /* Above the sticky CTA */
+                top: 1rem !important; /* Move to top on mobile */
+                bottom: auto !important;
                 left: 1rem !important;
                 right: 1rem !important;
                 max-width: none !important;
