@@ -6,9 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { event } from '@/components/MetaPixel';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
+import LiveSocialProof from '@/components/LiveSocialProof';
+import AtsQuizModal from '@/components/AtsQuizModal';
 
 export default function SalesPage() {
     const [showSticky, setShowSticky] = useState(false);
+    const [isQuizOpen, setIsQuizOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -55,7 +58,9 @@ export default function SalesPage() {
 
     return (
         <main style={{ overflowX: 'hidden', background: 'var(--background)' }}>
+            <LiveSocialProof />
             <ExitIntentPopup />
+            <AtsQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} onComplete={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} />
             {/* Navbar Minimalist */}
             <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100 }}>
                 <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -82,13 +87,25 @@ export default function SalesPage() {
                             Stop guessing why you aren't getting interviews. Get the AI-formatted, ATS-optimized resume template that forces recruiters to actually read your experience.
                         </p>
 
-                        <button
-                            className="btn btn-primary"
-                            style={{ fontSize: '1.25rem', padding: '1.25rem 2.5rem', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.3)', borderRadius: '99px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
-                            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                        >
-                            Get Lifetime Access for $29 <ArrowRight size={20} />
-                        </button>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'center', '@media (min-width: 768px)': { flexDirection: 'row' } } as any}>
+                            <button
+                                className="btn btn-primary"
+                                style={{ fontSize: '1.25rem', padding: '1.25rem 2.5rem', boxShadow: '0 10px 30px rgba(79, 70, 229, 0.3)', borderRadius: '99px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
+                                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                            >
+                                Get Lifetime Access for $29 <ArrowRight size={20} />
+                            </button>
+                            <button
+                                onClick={() => setIsQuizOpen(true)}
+                                style={{
+                                    fontSize: '1rem', fontWeight: 600, color: 'var(--muted-foreground)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'underline', padding: '0.5rem', cursor: 'pointer', background: 'transparent', border: 'none', transition: 'color 0.2s'
+                                }}
+                                onMouseOver={(e) => (e.currentTarget.style.color = 'var(--foreground)')}
+                                onMouseOut={(e) => (e.currentTarget.style.color = 'var(--muted-foreground)')}
+                            >
+                                Or, check my ATS score for free <Target size={16} />
+                            </button>
+                        </div>
                         <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: 'var(--muted-foreground)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
                             <ShieldCheck size={16} color="var(--success)" /> SECURE CHECKOUT • 100% MONEY-BACK GUARANTEE
                         </p>
@@ -128,7 +145,7 @@ export default function SalesPage() {
                                     INTERVIEW STAGE
                                 </div>
                                 <span style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e', padding: '0.25rem 0.75rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 600, marginBottom: '1.5rem' }}>
-                                    The ResumeFix Format
+                                    The Elite M7 Standard Format
                                 </span>
                                 <div style={{ fontFamily: 'Georgia, serif', fontSize: '0.85rem', color: 'var(--foreground)' }}>
                                     <div style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.25rem' }}>Senior Software Engineer</div>
@@ -371,7 +388,7 @@ export default function SalesPage() {
                         {/* Standard Plan */}
                         <div style={{ background: 'var(--card)', padding: '3rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
                             <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>Standard Access</h3>
-                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>The ATS-beating template.</p>
+                            <p style={{ color: 'var(--muted-foreground)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>The Harvard/Stanford M7 template.</p>
 
                             <div style={{ fontSize: '3.5rem', fontWeight: 800, lineHeight: 1, marginBottom: '0.5rem' }}>$29</div>
                             <p style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>Lifetime access. Pay once.</p>
@@ -526,10 +543,22 @@ export default function SalesPage() {
                 </div>
             </section>
 
-            {/* Footer minimal */}
-            <footer style={{ padding: '2rem 1rem', borderTop: '1px solid var(--border)', textAlign: 'center', color: 'var(--muted-foreground)' }}>
-                <div className="container">
-                    <p style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>ResumeFix is a product of Antigravity Labs.</p>
+            {/* Footer minimal & Trust Signals */}
+            <footer style={{ padding: '4rem 1rem 2rem', borderTop: '1px solid var(--border)', textAlign: 'center', color: 'var(--muted-foreground)', background: 'var(--background)' }}>
+                <div className="container" style={{ maxWidth: '600px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginBottom: '3rem' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--muted)', padding: '0.5rem 1rem', borderRadius: '99px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--foreground)' }}>
+                            <ShieldCheck size={16} color="var(--primary)" /> 100% Privacy Verified
+                        </div>
+                        <p style={{ fontSize: '0.85rem', lineHeight: 1.6 }}>
+                            We never sell your data to recruiters, employers, or third parties. Your resume data is temporarily processed for generation and remains your exclusive intellectual property.
+                        </p>
+                    </div>
+
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.5rem', color: 'var(--foreground)' }}>
+                        Proudly built by hiring managers in San Francisco, CA.
+                    </div>
+                    <p style={{ fontSize: '0.8rem', opacity: 0.8 }}>ResumeFix is a product of Antigravity Labs.</p>
                 </div>
             </footer>
 
