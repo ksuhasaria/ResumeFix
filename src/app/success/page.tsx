@@ -13,23 +13,43 @@ function SuccessContent() {
     const sessionId = searchParams.get('session_id');
 
     useEffect(() => {
-        // Only fire once per page load to avoid duplicate conversion tracking
-        if (!hasFired && plan) {
+        // Only fire if plan is present
+        if (plan && !hasFired) {
             const value = plan === 'pro' ? 99.00 : 29.00;
 
-            // Fire Facebook Pixel Purchase Event
-            event('Purchase', {
-                currency: 'USD',
-                value: value,
-                content_name: `ResumeFix ${plan.charAt(0).toUpperCase() + plan.slice(1)} Access`
-            });
+            // Log attempt
+            console.log(`⌛ Attempting to track Purchase in 1s... Plan: ${plan}, Value: $${value}`);
 
-            setHasFired(true);
-            console.log(`✅ Purchase tracked via Meta Pixel. Plan: ${plan}, Value: $${value}`);
-        } else if (!plan) {
-            console.log('ℹ️ Skipping Purchase tracking: "plan" parameter missing from URL.');
+            // Small delay to ensure the Meta Pixel script is fully initialized and ready to receive events
+            const timer = setTimeout(() => {
+                if (typeof window !== 'undefined' && (window as any).fbq) {
+                    event('Purchase', {
+                        currency: 'USD',
+                        value: value,
+                        content_name: `ResumeFix ${plan.charAt(0).toUpperCase() + plan.slice(1)} Access`,
+                        content_type: 'product'
+                    });
+                    setHasFired(true);
+                    console.log(`✅ Purchase event sent to Meta. Value: $${value}`);
+                } else {
+                    console.error('❌ Meta Pixel (fbq) not found even after delay.');
+                }
+            }, 1500);
+
+            return () => clearTimeout(timer);
         }
     }, [plan, hasFired]);
+
+    const manualTrigger = () => {
+        const value = plan === 'pro' ? 99.00 : 29.00;
+        event('Purchase', {
+            currency: 'USD',
+            value: value,
+            content_name: `ResumeFix Manual Test`,
+            content_type: 'product'
+        });
+        alert('Purchase event triggered manually. Check your Pixel Helper now!');
+    };
 
     return (
         <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--background)' }}>
@@ -53,10 +73,19 @@ function SuccessContent() {
                         A receipt and your magic login link will be sent to your email shortly. If you don't receive it within 5 minutes, please check your spam folder.
                     </p>
 
-                    <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', display: 'inline-block', textAlign: 'left', marginBottom: '3rem' }}>
+                    <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', display: 'inline-block', textAlign: 'left', marginBottom: '2rem', width: '100%' }}>
                         <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Order Details:</p>
-                        <p style={{ color: 'var(--muted-foreground)' }}>Plan: <span style={{ textTransform: 'capitalize', color: 'var(--foreground)' }}>{plan || 'Unknown'}</span></p>
-                        <p style={{ color: 'var(--muted-foreground)', fontSize: '0.85rem', wordBreak: 'break-all' }}>Session: {sessionId}</p>
+                        <p style={{ color: 'var(--muted-foreground)' }}>Plan: <span style={{ textTransform: 'capitalize', color: 'var(--foreground)' }}>{plan || 'Unknown'} Access</span></p>
+                        {sessionId && <p style={{ color: 'var(--muted-foreground)', fontSize: '0.8rem', marginTop: '0.5rem' }}>ID: {sessionId}</p>}
+                    </div>
+
+                    <div style={{ marginBottom: '2rem' }}>
+                        <button
+                            onClick={manualTrigger}
+                            style={{ background: 'transparent', border: '1px dashed var(--border)', color: 'var(--muted-foreground)', padding: '0.5rem 1rem', borderRadius: '0.5rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                        >
+                            Pixel not firing? Click to re-trigger Purchase
+                        </button>
                     </div>
 
                     <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
