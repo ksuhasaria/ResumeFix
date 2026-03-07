@@ -14,16 +14,22 @@ function SuccessContent() {
 
     useEffect(() => {
         // Only fire once per page load to avoid duplicate conversion tracking
-        if (!hasFired && plan && sessionId) {
+        if (!hasFired && plan) {
             const value = plan === 'pro' ? 99.00 : 29.00;
 
             // Fire Facebook Pixel Purchase Event
-            event('Purchase', { currency: 'USD', value: value });
-            setHasFired(true);
+            event('Purchase', {
+                currency: 'USD',
+                value: value,
+                content_name: `ResumeFix ${plan.charAt(0).toUpperCase() + plan.slice(1)} Access`
+            });
 
-            console.log(`✅ Purchase tracked. Plan: ${plan}, Value: $${value}`);
+            setHasFired(true);
+            console.log(`✅ Purchase tracked via Meta Pixel. Plan: ${plan}, Value: $${value}`);
+        } else if (!plan) {
+            console.log('ℹ️ Skipping Purchase tracking: "plan" parameter missing from URL.');
         }
-    }, [plan, sessionId, hasFired]);
+    }, [plan, hasFired]);
 
     return (
         <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--background)' }}>
