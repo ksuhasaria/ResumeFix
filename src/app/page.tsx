@@ -58,10 +58,35 @@ export default function SalesPage() {
             <LiveSocialProof />
             <AtsQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} onComplete={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} />
             {/* Navbar Minimalist */}
-            <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100 }}>
-                <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--primary)', fontSize: '1.25rem' }}>
+            <nav style={{ padding: '0.75rem 0', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.85)', backdropFilter: 'blur(15px)', position: 'sticky', top: 0, zIndex: 100, transition: 'all 0.3s' }}>
+                <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 800, color: 'var(--primary)', fontSize: '1.25rem', cursor: 'pointer' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                         <Sparkles size={24} /> ResumeFix
+                    </div>
+
+                    <div style={{ display: 'none', '@media (min-width: 768px)': { display: 'flex', gap: '1.5rem', alignItems: 'center' } } as any}>
+                        <a href="#how-it-works" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--muted-foreground)', transition: 'color 0.2s' }} onMouseOver={(e) => (e.currentTarget.style.color = 'var(--foreground)')} onMouseOut={(e) => (e.currentTarget.style.color = 'var(--muted-foreground)')}>How it works</a>
+                        <a href="#reviews" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--muted-foreground)', transition: 'color 0.2s' }} onMouseOver={(e) => (e.currentTarget.style.color = 'var(--foreground)')} onMouseOut={(e) => (e.currentTarget.style.color = 'var(--muted-foreground)')}>Reviews</a>
+                        <a href="#pricing" style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--muted-foreground)', transition: 'color 0.2s' }} onMouseOver={(e) => (e.currentTarget.style.color = 'var(--foreground)')} onMouseOut={(e) => (e.currentTarget.style.color = 'var(--muted-foreground)')}>Pricing</a>
+                        <button
+                            className="btn btn-primary"
+                            style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', fontWeight: 700, borderRadius: '99px' }}
+                            onClick={handleCheckout}
+                            disabled={loadingCheckout}
+                        >
+                            {loadingCheckout ? '...' : 'Fix My Resume'}
+                        </button>
+                    </div>
+
+                    <div style={{ '@media (min-width: 768px)': { display: 'none' } } as any}>
+                        <button
+                            className="btn btn-primary"
+                            style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem', fontWeight: 700, borderRadius: '99px' }}
+                            onClick={handleCheckout}
+                            disabled={loadingCheckout}
+                        >
+                            {loadingCheckout ? '...' : 'Fix Now'}
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -257,7 +282,7 @@ export default function SalesPage() {
             </section>
 
             {/* The Mechanism - How it works (Post-Purchase) */}
-            <section style={{ padding: '5rem 1rem', background: 'var(--muted)' }}>
+            <section id="how-it-works" style={{ padding: '5rem 1rem', background: 'var(--muted)' }}>
                 <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
                     <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
                         No tedious forms. No forced uploads.
@@ -322,7 +347,7 @@ export default function SalesPage() {
             </section>
 
             {/* Testimonials */}
-            <section style={{ padding: '5rem 1rem' }}>
+            <section id="reviews" style={{ padding: '5rem 1rem' }}>
                 <div className="container">
                     <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '3rem', fontWeight: 800, letterSpacing: '-0.02em', maxWidth: '800px', margin: '0 auto 3rem' }}>
                         "I didn't realize my old resume was literally unreadable by HR software until I used this."
