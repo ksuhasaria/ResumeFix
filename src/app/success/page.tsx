@@ -40,17 +40,6 @@ function SuccessContent() {
         }
     }, [plan, hasFired]);
 
-    const manualTrigger = () => {
-        const value = plan === 'pro' ? 99.00 : 29.00;
-        event('Purchase', {
-            currency: 'USD',
-            value: value,
-            content_name: `ResumeFix Manual Test`,
-            content_type: 'product'
-        });
-        alert('Purchase event triggered manually. Check your Pixel Helper now!');
-    };
-
     return (
         <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--background)' }}>
             <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)' }}>
@@ -73,19 +62,10 @@ function SuccessContent() {
                         A receipt and your magic login link will be sent to your email shortly. If you don't receive it within 5 minutes, please check your spam folder.
                     </p>
 
-                    <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', display: 'inline-block', textAlign: 'left', marginBottom: '2rem', width: '100%' }}>
+                    <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', display: 'inline-block', textAlign: 'left', marginBottom: '3rem', width: '100%' }}>
                         <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Order Details:</p>
                         <p style={{ color: 'var(--muted-foreground)' }}>Plan: <span style={{ textTransform: 'capitalize', color: 'var(--foreground)' }}>{plan || 'Unknown'} Access</span></p>
                         {sessionId && <p style={{ color: 'var(--muted-foreground)', fontSize: '0.8rem', marginTop: '0.5rem' }}>ID: {sessionId}</p>}
-                    </div>
-
-                    <div style={{ marginBottom: '2rem' }}>
-                        <button
-                            onClick={manualTrigger}
-                            style={{ background: 'transparent', border: '1px dashed var(--border)', color: 'var(--muted-foreground)', padding: '0.5rem 1rem', borderRadius: '0.5rem', fontSize: '0.8rem', cursor: 'pointer' }}
-                        >
-                            Pixel not firing? Click to re-trigger Purchase
-                        </button>
                     </div>
 
                     <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
