@@ -1,4 +1,6 @@
 export const dynamic = 'force-dynamic';
+import { NextResponse } from 'next/server';
+import OpenAI from 'openai';
 export async function POST(request: Request) {
     try {
         const pdf = require('pdf-parse');
