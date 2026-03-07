@@ -1,63 +1,71 @@
 'use client';
 
-import React, { useEffect, Suspense } from 'react';
-import { CheckCircle, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Sparkles, CheckCircle, ArrowRight } from 'lucide-react';
 import { event } from '@/components/MetaPixel';
 
-function PurchaseTracker() {
+function SuccessContent() {
     const searchParams = useSearchParams();
+    const [hasFired, setHasFired] = useState(false);
+
+    const plan = searchParams.get('plan');
+    const sessionId = searchParams.get('session_id');
 
     useEffect(() => {
-        const plan = searchParams.get('plan');
-        if (plan) {
-            const value = plan === 'standard' ? 29.00 : 99.00;
-            event('Purchase', { currency: 'USD', value });
-        }
-    }, [searchParams]);
+        // Only fire once per page load to avoid duplicate conversion tracking
+        if (!hasFired && plan && sessionId) {
+            const value = plan === 'pro' ? 99.00 : 29.00;
 
-    return null;
+            // Fire Facebook Pixel Purchase Event
+            event('Purchase', { currency: 'USD', value: value });
+            setHasFired(true);
+
+            console.log(`✅ Purchase tracked. Plan: ${plan}, Value: $${value}`);
+        }
+    }, [plan, sessionId, hasFired]);
+
+    return (
+        <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--background)' }}>
+            <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)' }}>
+                <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: 'var(--primary)', fontSize: '1.25rem' }}>
+                        <Sparkles size={24} /> ResumeFix
+                    </div>
+                </div>
+            </nav>
+
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
+                <div style={{ background: 'var(--card)', padding: '4rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border)', textAlign: 'center', maxWidth: '600px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', color: 'var(--success)' }}>
+                        <CheckCircle size={80} />
+                    </div>
+                    <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
+                        Payment Successful.
+                    </h1>
+                    <p style={{ color: 'var(--muted-foreground)', fontSize: '1.2rem', marginBottom: '3rem', lineHeight: 1.6 }}>
+                        A receipt and your magic login link will be sent to your email shortly. If you don't receive it within 5 minutes, please check your spam folder.
+                    </p>
+
+                    <div style={{ background: 'var(--muted)', padding: '1.5rem', borderRadius: '1rem', display: 'inline-block', textAlign: 'left', marginBottom: '3rem' }}>
+                        <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Order Details:</p>
+                        <p style={{ color: 'var(--muted-foreground)' }}>Plan: <span style={{ textTransform: 'capitalize', color: 'var(--foreground)' }}>{plan || 'Unknown'}</span></p>
+                        <p style={{ color: 'var(--muted-foreground)', fontSize: '0.85rem', wordBreak: 'break-all' }}>Session: {sessionId}</p>
+                    </div>
+
+                    <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+                        Return to Homepage <ArrowRight size={16} />
+                    </a>
+                </div>
+            </div>
+        </main>
+    );
 }
 
 export default function SuccessPage() {
     return (
-        <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background)' }}>
-            <Suspense fallback={null}>
-                <PurchaseTracker />
-            </Suspense>
-            <div className="container" style={{ maxWidth: '600px', textAlign: 'center', padding: '2rem' }}>
-                <div style={{ width: '80px', height: '80px', background: 'rgba(34, 197, 94, 0.1)', color: 'var(--success)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
-                    <CheckCircle size={40} />
-                </div>
-
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 800 }}>Payment Successful!</h1>
-                <p style={{ fontSize: '1.2rem', color: 'var(--muted-foreground)', marginBottom: '3rem', lineHeight: 1.6 }}>
-                    Your lifetime access has been unlocked. Please check your email for the receipt and your personal magic link to access your ResumeFix vault.
-                </p>
-
-                <div style={{ background: 'var(--card)', padding: '2rem', borderRadius: '1rem', border: '1px solid var(--border)', marginBottom: '3rem', textAlign: 'left' }}>
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem' }}>Next Steps:</h3>
-                    <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--muted-foreground)' }}>
-                        <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                            <span style={{ color: 'var(--primary)', fontWeight: 800 }}>1.</span>
-                            Find your welcome email (check spam if you don't see it).
-                        </li>
-                        <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                            <span style={{ color: 'var(--primary)', fontWeight: 800 }}>2.</span>
-                            Click the secure link to log in.
-                        </li>
-                        <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                            <span style={{ color: 'var(--primary)', fontWeight: 800 }}>3.</span>
-                            Upload your old resume and let the AI go to work!
-                        </li>
-                    </ul>
-                </div>
-
-                <Link href="/" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '1rem 2rem', fontSize: '1.1rem' }}>
-                    Return to Homepage <ArrowRight size={18} />
-                </Link>
-            </div>
-        </main>
+        <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+            <SuccessContent />
+        </Suspense>
     );
 }

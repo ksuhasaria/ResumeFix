@@ -5,6 +5,7 @@ import { Sparkles, CheckCircle, Star, ArrowRight, ShieldCheck, Zap, Target, Tren
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { event } from '@/components/MetaPixel';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
 
 export default function SalesPage() {
     const [showSticky, setShowSticky] = useState(false);
@@ -54,6 +55,7 @@ export default function SalesPage() {
 
     return (
         <main style={{ overflowX: 'hidden', background: 'var(--background)' }}>
+            <ExitIntentPopup />
             {/* Navbar Minimalist */}
             <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100 }}>
                 <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -211,6 +213,27 @@ export default function SalesPage() {
                 </div>
             </section>
 
+            {/* Founder's Note */}
+            <section style={{ padding: '5rem 1rem', background: 'var(--card)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                <div className="container" style={{ maxWidth: '800px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', textAlign: 'center' }}>
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop" alt="Founder" style={{ width: '120px', height: '120px', borderRadius: '50%', border: '4px solid var(--muted)' }} />
+                        <div>
+                            <h2 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+                                A quick note on why I built this.
+                            </h2>
+                            <p style={{ color: 'var(--muted-foreground)', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+                                After reviewing over 10,000 resumes as a Senior Manager at a Top Tech M7 company, I realized something heartbreaking: <strong>Brilliant engineers and marketers were getting auto-rejected before a human ever saw their application.</strong>
+                            </p>
+                            <p style={{ color: 'var(--muted-foreground)', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                                It wasn't their skills. It was their formatting and inability to write "HR-friendly" ROI statements. That's why I built ResumeFix. To level the playing field so the best talent actually gets the interview.
+                            </p>
+                            <div style={{ fontWeight: 700, color: 'var(--foreground)' }}>— Jason M., Creator of ResumeFix</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Testimonials */}
             <section style={{ padding: '5rem 1rem' }}>
                 <div className="container">
@@ -302,6 +325,10 @@ export default function SalesPage() {
                             >
                                 {loadingPlan === 'standard' ? 'Redirecting...' : 'Buy Lifetime Access - $29'}
                             </button>
+                            <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--muted-foreground)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><ShieldCheck size={14} color="var(--success)" /> 100% Secure Stripe Checkout</div>
+                                <div>Takes 30 seconds. No account required.</div>
+                            </div>
                         </div>
 
                         {/* Pro Plan */}
@@ -347,6 +374,10 @@ export default function SalesPage() {
                             >
                                 {loadingPlan === 'pro' ? 'Redirecting...' : 'Claim The Bundle - $99'}
                             </button>
+                            <div style={{ marginTop: '1rem', fontSize: '0.8rem', color: 'var(--muted-foreground)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}><ShieldCheck size={14} color="var(--success)" /> 100% Secure Stripe Checkout</div>
+                                <div>Takes 30 seconds. Instant Access.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
