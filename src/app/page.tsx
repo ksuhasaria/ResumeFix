@@ -5,7 +5,6 @@ import { Sparkles, CheckCircle, Star, ArrowRight, ShieldCheck, Zap, Target, Tren
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { event } from '@/components/MetaPixel';
-import ExitIntentPopup from '@/components/ExitIntentPopup';
 import LiveSocialProof from '@/components/LiveSocialProof';
 import AtsQuizModal from '@/components/AtsQuizModal';
 
@@ -59,7 +58,6 @@ export default function SalesPage() {
     return (
         <main style={{ overflowX: 'hidden', background: 'var(--background)' }}>
             <LiveSocialProof />
-            <ExitIntentPopup />
             <AtsQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} onComplete={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} />
             {/* Navbar Minimalist */}
             <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 100 }}>
